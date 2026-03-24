@@ -70,21 +70,60 @@ onValue(eventosRef, (snapshot) => {
 });
 
 // CALENDARIO SIMPLE
+let mesActual = new Date().getMonth();
+let añoActual = new Date().getFullYear();
+
 function renderCalendario(eventos) {
   const cont = document.getElementById("calendario");
   cont.innerHTML = "";
 
-  const hoy = new Date();
-  const año = hoy.getFullYear();
-  const mes = hoy.getMonth();
+  // HEADER (mes + botones)
+  const header = document.createElement("div");
+  header.style.display = "flex";
+  header.style.justifyContent = "space-between";
+  header.style.marginBottom = "10px";
 
-  const primerDia = new Date(año, mes, 1).getDay();
-  const diasMes = new Date(año, mes + 1, 0).getDate();
+  const btnPrev = document.createElement("button");
+  btnPrev.textContent = "←";
 
+  const titulo = document.createElement("span");
+  titulo.textContent = `${añoActual} - ${mesActual + 1}`;
+
+  const btnNext = document.createElement("button");
+  btnNext.textContent = "→";
+
+  header.appendChild(btnPrev);
+  header.appendChild(titulo);
+  header.appendChild(btnNext);
+
+  cont.appendChild(header);
+
+  btnPrev.onclick = () => {
+    mesActual--;
+    if (mesActual < 0) {
+      mesActual = 11;
+      añoActual--;
+    }
+    renderCalendario(eventos);
+  };
+
+  btnNext.onclick = () => {
+    mesActual++;
+    if (mesActual > 11) {
+      mesActual = 0;
+      añoActual++;
+    }
+    renderCalendario(eventos);
+  };
+
+  // GRID
   const grid = document.createElement("div");
   grid.classList.add("calendario-grid");
 
-  // Espacios vacíos
+  const primerDia = new Date(añoActual, mesActual, 1).getDay();
+  const diasMes = new Date(añoActual, mesActual + 1, 0).getDate();
+
+  // espacios vacíos
   for (let i = 0; i < primerDia; i++) {
     grid.appendChild(document.createElement("div"));
   }
@@ -93,15 +132,14 @@ function renderCalendario(eventos) {
     const div = document.createElement("div");
     div.classList.add("dia");
 
-    const fechaStr = `${año}-${String(mes + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    const fechaStr = `${añoActual}-${String(mesActual + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
 
-    // Número del día
     const numero = document.createElement("div");
     numero.classList.add("numero-dia");
     numero.textContent = d;
     div.appendChild(numero);
 
-    // Eventos de ese día
+    // 🔥 EVENTOS DEL DÍA
     const eventosDelDia = eventos.filter(ev => ev.fecha === fechaStr);
 
     eventosDelDia.forEach(ev => {
