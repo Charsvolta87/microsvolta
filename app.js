@@ -58,11 +58,11 @@ onValue(eventosRef, (snapshot) => {
   eventos.forEach(ev => {
     const li = document.createElement("li");
     li.innerHTML = `
-    <strong>${ev.nombre}</strong>
-    <div>📍 ${ev.lugar}</div>
-    <div>📅 ${ev.fecha}</div>
-    <div>💰 $${ev.precio}</div>
-  `;
+    <div class="evento-nombre">${ev.nombre}</div>
+    <div class="evento-info">📍 ${ev.lugar}</div>
+    <div class="evento-info">📅 ${ev.fecha}</div>
+    <div class="evento-info">💰 $${ev.precio}</div>
+`;
     lista.appendChild(li);
   });
 
