@@ -1,0 +1,70 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: #fff;
+  padding: 20px;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+.form-container, .lista-container, .calendario-container {
+  background: #1e1e1e;
+  padding: 15px;
+  margin: 20px auto;
+  border-radius: 10px;
+  max-width: 500px;
+}
+
+input {
+  width: 100%;
+  margin: 5px 0;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: #00c853;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #00e676;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: #2a2a2a;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.calendario-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.dia {
+  background: #2a2a2a;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.evento-dia {
+  background: #00c853;
+  color: #000;
+}
