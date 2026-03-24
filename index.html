@@ -7,27 +7,33 @@
 </head>
 <body>
 
-  <h1>Micros Volta</h1>
+  <h1 style="text-align:center; padding:10px;">🎸 Volta Viajes</h1>
 
   <div class="container">
 
-    <div class="card">
-      <h2>Agregar Evento</h2>
-      <input type="text" id="nombre" placeholder="Nombre del evento">
-      <input type="text" id="lugar" placeholder="Lugar">
-      <input type="date" id="fecha">
-      <input type="number" id="precio" placeholder="Precio">
-      <button id="btnAgregar">Agregar</button>
+    <!-- IZQUIERDA -->
+    <div class="left">
+      <div class="card">
+        <h2>Agregar Evento</h2>
+        <input type="text" id="nombre" placeholder="Nombre">
+        <input type="text" id="lugar" placeholder="Lugar">
+        <input type="date" id="fecha">
+        <input type="number" id="precio" placeholder="Precio">
+        <button id="btnAgregar">Agregar</button>
+      </div>
+
+      <div class="card">
+        <h2>Calendario</h2>
+        <div id="calendario"></div>
+      </div>
     </div>
 
-    <div class="card">
-      <h2>Próximos Eventos</h2>
-      <ul id="listaEventos"></ul>
-    </div>
-
-    <div class="card">
-      <h2>Calendario</h2>
-      <div id="calendario"></div>
+    <!-- DERECHA -->
+    <div class="right">
+      <div class="card">
+        <h2>Eventos</h2>
+        <ul id="listaEventos"></ul>
+      </div>
     </div>
 
   </div>
