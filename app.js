@@ -19,19 +19,27 @@ const lista = document.getElementById("listaEventos");
 // AGREGAR EVENTO
 btn.addEventListener("click", () => {
   const nombre = document.getElementById("nombre").value;
+  const lugar = document.getElementById("lugar").value;
   const fecha = document.getElementById("fecha").value;
   const precio = document.getElementById("precio").value;
 
-  if (!nombre || !fecha || !precio) {
+  if (!nombre || !lugar || !fecha || !precio) {
     alert("Completa todo capo");
     return;
   }
 
   push(eventosRef, {
     nombre,
+    lugar,
     fecha,
     precio: Number(precio)
   });
+
+  // 🔥 RESET FORMULARIO
+  document.getElementById("nombre").value = "";
+  document.getElementById("lugar").value = "";
+  document.getElementById("fecha").value = "";
+  document.getElementById("precio").value = "";
 });
 
 // ESCUCHAR DATOS EN TIEMPO REAL
@@ -50,9 +58,11 @@ onValue(eventosRef, (snapshot) => {
   eventos.forEach(ev => {
     const li = document.createElement("li");
     li.innerHTML = `
-      <strong>${ev.nombre}</strong><br>
-      📅 ${ev.fecha} - 💰 $${ev.precio}
-    `;
+    <strong>${ev.nombre}</strong>
+    <div>📍 ${ev.lugar}</div>
+    <div>📅 ${ev.fecha}</div>
+    <div>💰 $${ev.precio}</div>
+  `;
     lista.appendChild(li);
   });
 
