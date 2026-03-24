@@ -5,28 +5,17 @@
 }
 
 body {
-  font-family: 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   background: #0f0f0f;
-  color: #ffffff;
-  padding: 15px;
+  color: white;
 }
 
-/* TITULOS */
-h1 {
-  text-align: center;
-  font-size: 1.6rem;
-  margin-bottom: 20px;
-}
-
-h2 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-}
-
-/* CONTENEDOR GENERAL */
+/* CONTENEDOR PRINCIPAL */
 .container {
-  max-width: 600px;
-  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  padding: 15px;
 }
 
 /* TARJETAS */
@@ -34,8 +23,24 @@ h2 {
   background: #1a1a1a;
   border-radius: 12px;
   padding: 15px;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+/* DESKTOP: dividir pantalla */
+@media (min-width: 900px) {
+  .container {
+    grid-template-columns: 1fr 2fr;
+    height: 100vh;
+  }
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .right {
+    overflow-y: auto;
+  }
 }
 
 /* INPUTS */
@@ -47,14 +52,8 @@ input {
   border: none;
   background: #2a2a2a;
   color: white;
-  font-size: 0.95rem;
 }
 
-input:focus {
-  outline: 2px solid #00c853;
-}
-
-/* BOTON */
 button {
   width: 100%;
   padding: 12px;
@@ -63,41 +62,28 @@ button {
   background: #00c853;
   color: black;
   font-weight: bold;
-  cursor: pointer;
-  transition: 0.2s;
 }
 
-button:hover {
-  background: #00e676;
-}
-
-/* LISTA EVENTOS */
+/* LISTA */
 ul {
   list-style: none;
 }
 
 li {
   background: #232323;
-  border-radius: 10px;
   padding: 12px;
+  border-radius: 10px;
   margin-bottom: 10px;
-  transition: 0.2s;
 }
 
-li:hover {
-  transform: scale(1.02);
-}
-
-/* TEXTO EVENTO */
+/* EVENTO */
 .evento-nombre {
   font-weight: bold;
-  font-size: 1rem;
 }
 
 .evento-info {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   opacity: 0.8;
-  margin-top: 4px;
 }
 
 /* CALENDARIO */
@@ -109,33 +95,22 @@ li:hover {
 
 .dia {
   background: #2a2a2a;
-  padding: 10px;
+  padding: 8px;
   border-radius: 6px;
-  text-align: center;
-  font-size: 0.8rem;
+  min-height: 70px;
+  font-size: 0.75rem;
 }
 
-.evento-dia {
+.numero-dia {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.evento-cal {
   background: #00c853;
   color: black;
-  font-weight: bold;
-}
-
-/* 📱 MOBILE FIRST YA ESTÁ, pero mejoramos desktop */
-@media (min-width: 768px) {
-  h1 {
-    font-size: 2rem;
-  }
-
-  .card {
-    padding: 20px;
-  }
-
-  input {
-    font-size: 1rem;
-  }
-
-  button {
-    font-size: 1rem;
-  }
+  margin-top: 3px;
+  padding: 2px;
+  border-radius: 4px;
+  font-size: 0.7rem;
 }
