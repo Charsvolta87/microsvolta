@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Volta Viajes - Eventos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <h1>🎸 Volta Viajes - Eventos</h1>
+
+  <!-- FORMULARIO -->
+  <div class="form-container">
+    <h2>Agregar Evento</h2>
+    <input type="text" id="nombre" placeholder="Nombre del evento">
+    <input type="date" id="fecha">
+    <input type="number" id="precio" placeholder="Precio">
+    <button id="btnAgregar">Agregar</button>
+  </div>
+
+  <!-- LISTA -->
+  <div class="lista-container">
+    <h2>Próximos Eventos</h2>
+    <ul id="listaEventos"></ul>
+  </div>
+
+  <!-- CALENDARIO -->
+  <div class="calendario-container">
+    <h2>Calendario</h2>
+    <div id="calendario"></div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
