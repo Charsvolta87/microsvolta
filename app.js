@@ -84,6 +84,7 @@ function renderCalendario(eventos) {
   const grid = document.createElement("div");
   grid.classList.add("calendario-grid");
 
+  // Espacios vacíos
   for (let i = 0; i < primerDia; i++) {
     grid.appendChild(document.createElement("div"));
   }
@@ -91,14 +92,24 @@ function renderCalendario(eventos) {
   for (let d = 1; d <= diasMes; d++) {
     const div = document.createElement("div");
     div.classList.add("dia");
-    div.textContent = d;
 
     const fechaStr = `${año}-${String(mes + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
 
-    // MARCAR SI HAY EVENTO
-    if (eventos.some(ev => ev.fecha === fechaStr)) {
-      div.classList.add("evento-dia");
-    }
+    // Número del día
+    const numero = document.createElement("div");
+    numero.classList.add("numero-dia");
+    numero.textContent = d;
+    div.appendChild(numero);
+
+    // Eventos de ese día
+    const eventosDelDia = eventos.filter(ev => ev.fecha === fechaStr);
+
+    eventosDelDia.forEach(ev => {
+      const e = document.createElement("div");
+      e.classList.add("evento-cal");
+      e.textContent = ev.nombre;
+      div.appendChild(e);
+    });
 
     grid.appendChild(div);
   }
