@@ -1,4 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+fimport { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 // CONFIG
@@ -79,22 +79,29 @@ function renderCalendario(eventos) {
 
   // HEADER (mes + botones)
   const header = document.createElement("div");
-  header.style.display = "flex";
-  header.style.justifyContent = "space-between";
-  header.style.marginBottom = "10px";
+header.style.display = "flex";
+header.style.justifyContent = "space-between";
+header.style.alignItems = "center";
+header.style.marginBottom = "10px";
 
-  const btnPrev = document.createElement("button");
-  btnPrev.textContent = "←";
+// Botón anterior
+const btnPrev = document.createElement("button");
+btnPrev.textContent = "←";
+btnPrev.classList.add("cal-btn");
 
-  const titulo = document.createElement("span");
-  titulo.textContent = `${añoActual} - ${mesActual + 1}`;
+// Título
+const titulo = document.createElement("span");
+titulo.textContent = `${añoActual} - ${mesActual + 1}`;
+titulo.classList.add("cal-titulo");
 
-  const btnNext = document.createElement("button");
-  btnNext.textContent = "→";
+// Botón siguiente
+const btnNext = document.createElement("button");
+btnNext.textContent = "→";
+btnNext.classList.add("cal-btn");
 
-  header.appendChild(btnPrev);
-  header.appendChild(titulo);
-  header.appendChild(btnNext);
+header.appendChild(btnPrev);
+header.appendChild(titulo);
+header.appendChild(btnNext);
 
   cont.appendChild(header);
 
