@@ -120,3 +120,30 @@ padding-right: 12px;
   border-radius: 4px;
   font-size: 0.7rem;
 }
+
+
+/* HEADER CALENDARIO */
+.cal-titulo {
+  font-size: 0.95rem;
+  font-weight: bold;
+  text-align: center;
+  flex: 1;
+}
+
+/* BOTONES CHICOS Y ELEGANTES */
+.cal-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #00c853;
+  color: black;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Hover (opcional) */
+.cal-btn:hover {
+  background: #00e676;
+}
