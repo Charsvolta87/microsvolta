@@ -16,6 +16,13 @@ const eventosRef = ref(db, "eventos");
 const btn = document.getElementById("btnAgregar");
 const lista = document.getElementById("listaEventos");
 
+/// CONFIGURACIÓN DE MESES
+const meses = [
+  "Enero", "Febrero", "Marzo", "Abril",
+  "Mayo", "Junio", "Julio", "Agosto",
+  "Septiembre", "Octubre", "Noviembre", "Diciembre"
+];
+
 // AGREGAR EVENTO
 btn.addEventListener("click", () => {
   const nombre = document.getElementById("nombre").value;
@@ -91,7 +98,7 @@ btnPrev.classList.add("cal-btn");
 
 // Título
 const titulo = document.createElement("span");
-titulo.textContent = `${añoActual} - ${mesActual + 1}`;
+titulo.textContent = `${meses[mesActual]} ${añoActual}`;
 titulo.classList.add("cal-titulo");
 
 // Botón siguiente
