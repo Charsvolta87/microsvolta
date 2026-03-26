@@ -170,3 +170,14 @@ li {
   border: none;
   width: 100%;
 }
+
+
+select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #2a2a2a;
+  color: white;
+}

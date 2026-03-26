@@ -38,8 +38,9 @@ document.getElementById("btnPasajero").addEventListener("click", () => {
   const dni = document.getElementById("pDni").value;
   const subida = document.getElementById("pSubida").value;
   const telefono = document.getElementById("pTelefono").value;
+  const viaje = document.getElementById("pViaje").value;
 
-  if (!nombre || !dni || !subida|| !telefono) {
+  if (!nombre || !dni || !subida|| !telefono|| !viaje) {
     alert("Completa todo");
     return;
   }
@@ -48,7 +49,8 @@ document.getElementById("btnPasajero").addEventListener("click", () => {
     nombre,
     dni,
     subida,
-    telefono
+    telefono,
+    viaje
   });
 
   // reset
@@ -56,6 +58,7 @@ document.getElementById("btnPasajero").addEventListener("click", () => {
   document.getElementById("pDni").value = "";
   document.getElementById("pSubida").value = "";
   document.getElementById("pTelefono").value = "";
+  document.getElementById("pViaje").value = "";
   
 });
 
@@ -68,7 +71,7 @@ onValue(pasajerosRef, (snap) => {
 
   Object.values(data).forEach(p => {
     const li = document.createElement("li");
-    li.textContent = `${p.nombre} - DNI: ${p.dni} - 📍 ${p.subida}- Teléfono: ${p.telefono}`;
+    li.textContent = `${p.nombre} - DNI: ${p.dni} - 📍 ${p.subida}- Teléfono: ${p.telefono}- Viaje: ${p.viaje}`;
     lista.appendChild(li);
   });
 });
