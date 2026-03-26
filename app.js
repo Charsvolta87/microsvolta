@@ -1,6 +1,14 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
+function toggleSeleccion(ev) {
+  const eventoRef = ref(db, "eventos/" + ev.id);
+
+  update(eventoRef, {
+    seleccionado: !ev.seleccionado
+  });
+}
 // CONFIG
 const firebaseConfig = {
   apiKey: "AIzaSyC-hMSencH40g6ojgPSqosj69Ixkkraf7w",
@@ -39,7 +47,8 @@ btn.addEventListener("click", () => {
     nombre,
     lugar,
     fecha,
-    precio: Number(precio)
+    precio: Number(precio),
+    seleccionado: false // 🔥 nuevo
   });
 
   // 🔥 RESET FORMULARIO
@@ -54,7 +63,10 @@ onValue(eventosRef, (snapshot) => {
   const data = snapshot.val();
   if (!data) return;
 
-  let eventos = Object.values(data);
+  let eventos = Object.entries(data).map(([id, ev]) => ({
+  id,
+  ...ev
+}));
 
   // ORDENAR POR FECHA
   eventos.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
@@ -62,16 +74,28 @@ onValue(eventosRef, (snapshot) => {
   // LIMPIAR LISTA
   lista.innerHTML = "";
 
-  eventos.forEach(ev => {
-    const li = document.createElement("li");
-    li.innerHTML = `
+  eventos.forEach((ev, index) => {
+  const li = document.createElement("li");
+
+  // 🔥 clase si está seleccionado
+  if (ev.seleccionado) {
+    li.classList.add("seleccionado");
+  }
+
+  li.innerHTML = `
     <div class="evento-nombre">${ev.nombre}</div>
     <div class="evento-info">📍 ${ev.lugar}</div>
     <div class="evento-info">📅 ${ev.fecha}</div>
     <div class="evento-info">💰 $${ev.precio}</div>
-`;
-    lista.appendChild(li);
+  `;
+
+  // 🔥 CLICK PARA TOGGLE
+  li.addEventListener("click", () => {
+    toggleSeleccion(ev);
   });
+
+  lista.appendChild(li);
+});
 
   renderCalendario(eventos);
 });

@@ -147,3 +147,16 @@ padding-right: 12px;
 .cal-btn:hover {
   background: #00e676;
 }
+
+/* EVENTO SELECCIONADO */
+.seleccionado {
+  background: #00c853 !important;
+  color: black;
+  transform: scale(1.02);
+}
+
+/* Transición suave */
+li {
+  transition: 0.2s;
+  cursor: pointer;
+}
