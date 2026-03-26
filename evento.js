@@ -37,8 +37,9 @@ document.getElementById("btnPasajero").addEventListener("click", () => {
   const nombre = document.getElementById("pNombre").value;
   const dni = document.getElementById("pDni").value;
   const subida = document.getElementById("pSubida").value;
+  const telefono = document.getElementById("pTelefono").value;
 
-  if (!nombre || !dni || !subida) {
+  if (!nombre || !dni || !subida|| !telefono) {
     alert("Completa todo");
     return;
   }
@@ -46,13 +47,16 @@ document.getElementById("btnPasajero").addEventListener("click", () => {
   push(pasajerosRef, {
     nombre,
     dni,
-    subida
+    subida,
+    telefono
   });
 
   // reset
   document.getElementById("pNombre").value = "";
   document.getElementById("pDni").value = "";
   document.getElementById("pSubida").value = "";
+  document.getElementById("pTelefono").value = "";
+  
 });
 
 // LISTAR PASAJEROS
@@ -64,7 +68,7 @@ onValue(pasajerosRef, (snap) => {
 
   Object.values(data).forEach(p => {
     const li = document.createElement("li");
-    li.textContent = `${p.nombre} - DNI: ${p.dni} - 📍 ${p.subida}`;
+    li.textContent = `${p.nombre} - DNI: ${p.dni} - 📍 ${p.subida}- Teléfono: ${p.telefono}`;
     lista.appendChild(li);
   });
 });
