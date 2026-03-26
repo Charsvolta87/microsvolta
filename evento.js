@@ -92,3 +92,22 @@ function renderPasajeros(listaDatos) {
     lista.appendChild(li);
   });
 }
+
+
+const buscador = document.getElementById("buscadorPasajeros");
+
+buscador.addEventListener("input", (e) => {
+  const texto = e.target.value.toLowerCase();
+
+  const filtrados = pasajerosGlobal.filter(p => {
+    return (
+      String(p.nombre).toLowerCase().includes(texto) ||
+      String(p.dni).toLowerCase().includes(texto) ||
+      String(p.subida).toLowerCase().includes(texto) ||
+      String(p.telefono).toLowerCase().includes(texto) ||
+      String(p.viaje).toLowerCase().includes(texto)
+    );
+  });
+
+  renderPasajeros(filtrados);
+});
