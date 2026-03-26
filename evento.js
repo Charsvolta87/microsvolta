@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, ref, onValue, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+let pasajerosGlobal = [];
 
 // CONFIG
 const firebaseConfig = {
@@ -67,17 +68,27 @@ onValue(pasajerosRef, (snap) => {
   const data = snap.val();
   lista.innerHTML = "";
 
-  if (!data) return;
+  if (!data) {
+    pasajerosGlobal = [];
+    return;
+  }
 
-  Object.values(data).forEach(p => {
-    const li = document.createElement("li");
+  pasajerosGlobal = Object.values(data);
+
+  renderPasajeros(pasajerosGlobal);
+});
+function renderPasajeros(listaDatos) {
+  lista.innerHTML = "";
+
+  listaDatos.forEach(p => {
     let tipoViaje = "";
 
     if (p.viaje === "ida_vuelta") tipoViaje = "🟢 Ida y Vuelta";
     if (p.viaje === "ida") tipoViaje = "🔵 Ida";
     if (p.viaje === "vuelta") tipoViaje = "🟡 Vuelta";
 
+    const li = document.createElement("li");
     li.textContent = `${p.nombre} - DNI: ${p.dni} - 📍 ${p.subida} - 📞 ${p.telefono} - ${tipoViaje}`;
     lista.appendChild(li);
   });
-});
+}
