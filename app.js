@@ -74,25 +74,32 @@ onValue(eventosRef, (snapshot) => {
   // LIMPIAR LISTA
   lista.innerHTML = "";
 
-  eventos.forEach((ev, index) => {
+  eventos.forEach((ev) => {
   const li = document.createElement("li");
 
-  // 🔥 clase si está seleccionado
   if (ev.seleccionado) {
     li.classList.add("seleccionado");
   }
 
   li.innerHTML = `
-  <div class="evento-nombre">${ev.nombre}</div>
-  <div class="evento-info">📍 ${ev.lugar}</div>
-  <div class="evento-info">📅 ${ev.fecha}</div>
-  <div class="evento-info">💰 $${ev.precio}</div>
-  <button class="btn-ver">Ver más</button>
-`;
+    <div class="evento-nombre">${ev.nombre}</div>
+    <div class="evento-info">📍 ${ev.lugar}</div>
+    <div class="evento-info">📅 ${ev.fecha}</div>
+    <div class="evento-info">💰 $${ev.precio}</div>
+    <button class="btn-ver">Ver más</button>
+  `;
 
-  // 🔥 CLICK PARA TOGGLE
+  // 🔥 CLICK EN TARJETA (selección)
   li.addEventListener("click", () => {
     toggleSeleccion(ev);
+  });
+
+  // 🔥 CLICK EN BOTÓN (ir a detalle)
+  const btnVer = li.querySelector(".btn-ver");
+
+  btnVer.addEventListener("click", (e) => {
+    e.stopPropagation(); // evita que seleccione el evento
+    window.location.href = `evento.html?id=${ev.id}`;
   });
 
   lista.appendChild(li);
