@@ -71,7 +71,13 @@ onValue(pasajerosRef, (snap) => {
 
   Object.values(data).forEach(p => {
     const li = document.createElement("li");
-    li.textContent = `${p.nombre} - DNI: ${p.dni} - 📍 ${p.subida}- Teléfono: ${p.telefono}- Viaje: ${p.viaje}`;
+    let tipoViaje = "";
+
+    if (p.viaje === "ida_vuelta") tipoViaje = "🟢 Ida y Vuelta";
+    if (p.viaje === "ida") tipoViaje = "🔵 Ida";
+    if (p.viaje === "vuelta") tipoViaje = "🟡 Vuelta";
+
+    li.textContent = `${p.nombre} - DNI: ${p.dni} - 📍 ${p.subida} - 📞 ${p.telefono} - ${tipoViaje}`;
     lista.appendChild(li);
   });
 });
