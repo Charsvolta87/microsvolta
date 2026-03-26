@@ -83,11 +83,12 @@ onValue(eventosRef, (snapshot) => {
   }
 
   li.innerHTML = `
-    <div class="evento-nombre">${ev.nombre}</div>
-    <div class="evento-info">📍 ${ev.lugar}</div>
-    <div class="evento-info">📅 ${ev.fecha}</div>
-    <div class="evento-info">💰 $${ev.precio}</div>
-  `;
+  <div class="evento-nombre">${ev.nombre}</div>
+  <div class="evento-info">📍 ${ev.lugar}</div>
+  <div class="evento-info">📅 ${ev.fecha}</div>
+  <div class="evento-info">💰 $${ev.precio}</div>
+  <button class="btn-ver">Ver más</button>
+`;
 
   // 🔥 CLICK PARA TOGGLE
   li.addEventListener("click", () => {
@@ -192,3 +193,8 @@ header.appendChild(btnNext);
 
   cont.appendChild(grid);
 }
+li.querySelector(".btn-ver").addEventListener("click", (e) => {
+  e.stopPropagation(); // evita conflicto con selección
+
+  window.location.href = `evento.html?id=${ev.id}`;
+});

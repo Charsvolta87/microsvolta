@@ -160,3 +160,13 @@ li {
   transition: 0.2s;
   cursor: pointer;
 }
+
+.btn-ver {
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: 6px;
+  background: #2962ff;
+  color: white;
+  border: none;
+  width: 100%;
+}
