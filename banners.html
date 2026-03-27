@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador Micros CV</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+}
+
+input, button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+button {
+    background: gold;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+canvas {
+    border: 2px solid #444;
+    background: #0d1b2a;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Generador de Flyers - Micros CV</h2>
+
+<div class="container">
+
+<form id="form">
+    <input type="text" id="artista" placeholder="Artista" required>
+    <input type="text" id="lugar" placeholder="Lugar" required>
+    <input type="text" id="fecha" placeholder="Fecha" required>
+    <input type="text" id="punto1" placeholder="Punto 1" required>
+    <input type="text" id="punto2" placeholder="Punto 2" required>
+    <input type="text" id="punto3" placeholder="Punto 3" required>
+    <input type="text" id="telefono" placeholder="Teléfono" required>
+    <input type="file" id="imagen" accept="image/*" required>
+
+    <button type="submit">Generar Banner</button>
+    <button type="button" onclick="descargar()">Descargar</button>
+</form>
+
+<canvas id="canvas" width="800" height="800"></canvas>
+
+</div>
+
+<script>
+const form = document.getElementById("form");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+let img = new Image();
+
+form.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const artista = document.getElementById("artista").value;
+    const lugar = document.getElementById("lugar").value;
+    const fecha = document.getElementById("fecha").value;
+    const p1 = document.getElementById("punto1").value;
+    const p2 = document.getElementById("punto2").value;
+    const p3 = document.getElementById("punto3").value;
+    const tel = document.getElementById("telefono").value;
+
+    const file = document.getElementById("imagen").files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(event){
+        img.src = event.target.result;
+        img.onload = function(){
+            generar(artista, lugar, fecha, p1, p2, p3, tel);
+        }
+    }
+
+    reader.readAsDataURL(file);
+});
+
+function generar(artista, lugar, fecha, p1, p2, p3, tel){
+
+    // Fondo
+    ctx.fillStyle = "#0d1b2a";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Imagen artista
+    ctx.drawImage(img, 0, 0, 400, 800);
+
+    // Overlay oscuro
+    ctx.fillStyle = "rgba(0,0,0,0.5)";
+    ctx.fillRect(0, 0, 800, 800);
+
+    // Texto
+    ctx.fillStyle = "white";
+
+    ctx.font = "bold 50px Arial";
+    ctx.fillText(artista.toUpperCase(), 420, 100);
+
+    ctx.font = "30px Arial";
+    ctx.fillText(lugar, 420, 150);
+    ctx.fillText(fecha, 420, 190);
+
+    ctx.font = "25px Arial";
+    ctx.fillText("Salimos de:", 420, 260);
+    ctx.fillText("• " + p1, 420, 300);
+    ctx.fillText("• " + p2, 420, 340);
+    ctx.fillText("• " + p3, 420, 380);
+
+    ctx.font = "bold 35px Arial";
+    ctx.fillStyle = "gold";
+    ctx.fillText("📲 " + tel, 420, 480);
+
+    ctx.font = "20px Arial";
+    ctx.fillStyle = "white";
+    ctx.fillText("Reservá tu lugar", 420, 520);
+
+    // Logo simple placeholder
+    ctx.beginPath();
+    ctx.arc(700, 700, 60, 0, Math.PI * 2);
+    ctx.strokeStyle = "gold";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    ctx.font = "20px Arial";
+    ctx.fillText("CV", 685, 710);
+}
+
+function descargar(){
+    const link = document.createElement("a");
+    link.download = "micros_cv_banner.png";
+    link.href = canvas.toDataURL();
+    link.click();
+}
+</script>
+
+</body>
+</html>
